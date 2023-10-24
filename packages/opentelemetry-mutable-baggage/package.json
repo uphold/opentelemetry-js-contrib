@@ -1,0 +1,25 @@
+{
+  "name": "@uphold/opentelemetry-mutable-baggage",
+  "version": "0.0.0",
+  "description": "Package that allows an Opentelemetry baggage to be mutable",
+  "main": "dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "lint": "eslint --ext .ts .",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uphold/opentelemetry-js-contrib.git"
+  },
+  "keywords": [
+    "opentelemetry",
+    "instrumentation",
+    "nodejs",
+    "tracing",
+    "baggage"
+  ],
+  "author": "Uphold",
+  "license": "MIT"
+}
