@@ -16,6 +16,9 @@
     "tracing",
     "baggage"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
