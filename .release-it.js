@@ -12,8 +12,7 @@ module.exports = {
   },
   hooks: {
     'after:bump': `
-      npm run build &&
-      git add dist --all
+      npm run build
     `
   }
 };
