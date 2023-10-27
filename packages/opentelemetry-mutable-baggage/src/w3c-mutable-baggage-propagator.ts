@@ -24,9 +24,7 @@ export class W3CMutableBaggagePropagator implements TextMapPropagator {
 
     const keyPairs = baggageUtils
       .getKeyPairs(baggage)
-      .filter(pair => {
-        return pair.length <= BAGGAGE_MAX_PER_NAME_VALUE_PAIRS;
-      })
+      .filter(pair => pair.length <= BAGGAGE_MAX_PER_NAME_VALUE_PAIRS)
       .slice(0, BAGGAGE_MAX_NAME_VALUE_PAIRS);
 
     const headerValue = baggageUtils.serializeKeyPairs(keyPairs);

@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NPM_WORKSPACE: packages/opentelemetry-mutable-baggage
+    strategy:
+      matrix:
+        node: [18, 20]
+    name: Node v${{ matrix.node }}
 
     steps:
     - name: Checkout code
@@ -19,7 +23,7 @@ jobs:
     - name: Setup Node.js version
       uses: actions/setup-node@v3
       with:
-        node-version: 20
+        node-version: ${{ matrix.node }}
 
     - name: Install dependencies
       run: npm ci
