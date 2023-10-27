@@ -1,19 +1,19 @@
 module.exports = {
   git: {
-    changelog: 'echo "## Changelog\\n\\n$(npx @uphold/github-changelog-generator -f unreleased | tail -n +4 -f)"',
-    commitMessage: 'Release ${name}@${version}',
+    changelog: 'git log --pretty=format:"* %s (%h)" ${from}...${to} .',
+    commitMessage: 'Release ${npm.name}@${version}',
+    requireBranch: 'master',
     requireCommits: true,
-    tagName: '${name}@v${version}'
+    tagName: '${npm.name}@v${version}'
   },
   github: {
     release: true,
-    releaseName: '${name}@v${version}'
+    releaseName: '${npm.name}@v${version}'
   },
   hooks: {
     'after:bump': `
       npm run build &&
-      echo "$(npx @uphold/github-changelog-generator -f \${version} -t v\${version})\n$(tail -n +2 CHANGELOG.md)" > CHANGELOG.md &&
-      git add dist CHANGELOG.md --all
+      git add dist --all
     `
   }
 };
