@@ -22,6 +22,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",

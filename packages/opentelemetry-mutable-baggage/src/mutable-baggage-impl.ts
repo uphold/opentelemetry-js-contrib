@@ -18,7 +18,7 @@ export class MutableBaggageImpl implements Baggage {
   }
 
   getAllEntries(): [string, BaggageEntry][] {
-    return Array.from(this.entries.entries()).map(([key, value]) => [key, value]);
+    return Array.from(this.entries.entries());
   }
 
   setEntry(key: string, entry: BaggageEntry): MutableBaggageImpl {
