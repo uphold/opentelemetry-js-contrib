@@ -19,3 +19,7 @@ npm test
 ## License
 
 All packages are licensed under MIT.
+
+## Release
+
+Click on `Run Workflow` on the [release github action](https://github.com/uphold/opentelemetry-js-contrib/actions/workflows/release.yaml).
