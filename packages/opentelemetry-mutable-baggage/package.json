@@ -30,8 +30,8 @@
     "build": "tsc",
     "lint": "eslint --ext .ts,.js .",
     "postlint": "tsc --noEmit",
-    "test": "vitest",
-    "release": "release-it"
+    "release": "release-it",
+    "test": "vitest"
   },
   "lint-staged": {
     "*.{ts,js}": [

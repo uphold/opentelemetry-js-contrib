@@ -25,6 +25,7 @@
     "@opentelemetry/core": "^1.17.1",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
+    "@uphold/github-changelog-generator": "^3.4.0",
     "@vitest/coverage-v8": "^0.34.6",
     "eslint": "~8.52.0",
     "eslint-config-uphold": "^5.0.1",
