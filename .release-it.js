@@ -13,7 +13,7 @@ module.exports = {
   },
   hooks: {
     'after:bump': `
-      echo "$(npx @uphold/github-changelog-generator -rtp \${npm.name} -f \${version} -t v\${npm.name}@v\${version})\n$(tail -n +2 CHANGELOG.md)" > CHANGELOG.md &&
+      echo "$(npx @uphold/github-changelog-generator -rtp \${npm.name} -f \${npm.name}@v\${version})\n$(tail -n +2 CHANGELOG.md)" > CHANGELOG.md &&
       npm run build
     `
   }
