@@ -26,12 +26,12 @@
     "node": ">=18"
   },
   "scripts": {
-    "prebuild": "rm -rf dist",
     "build": "tsc",
     "lint": "eslint --ext .ts,.js .",
     "postlint": "tsc --noEmit",
-    "test": "vitest",
-    "release": "release-it"
+    "prebuild": "rm -rf dist",
+    "release": "release-it",
+    "test": "vitest"
   },
   "lint-staged": {
     "*.{ts,js}": [
