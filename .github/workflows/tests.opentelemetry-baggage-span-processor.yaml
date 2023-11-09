@@ -1,0 +1,38 @@
+name: Tests - opentelemetry-baggage-span-processor
+
+on:
+  push:
+    paths:
+    - '*'
+    - 'packages/opentelemetry-baggage-span-processor/**'
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    env:
+      NPM_WORKSPACE: packages/opentelemetry-baggage-span-processor
+    strategy:
+      matrix:
+        node: [18, 20]
+    name: Node v${{ matrix.node }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js version
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node }}
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run lint
+      run: npm run lint --workspace $NPM_WORKSPACE
+
+    - name: Run tests
+      env:
+        VITEST_MAX_THREADS: 2
+        VITEST_MIN_THREADS: 1
+      run: npm run test --workspace $NPM_WORKSPACE

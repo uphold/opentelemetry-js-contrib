@@ -1,0 +1,54 @@
+{
+  "name": "@uphold/opentelemetry-baggage-span-processor",
+  "version": "0.0.0",
+  "description": "Package that sets all baggage entries as span attributes.",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "author": "Uphold",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uphold/opentelemetry-js-contrib.git"
+  },
+  "keywords": [
+    "opentelemetry",
+    "instrumentation",
+    "nodejs",
+    "tracing",
+    "attributes",
+    "baggage",
+    "processor",
+    "search",
+    "span"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "lint": "eslint --ext .ts,.js .",
+    "postlint": "tsc --noEmit",
+    "release": "release-it",
+    "test": "vitest"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --ext .ts,.js"
+    ]
+  },
+  "dependencies": {
+    "@opentelemetry/sdk-trace-base": "^1.18.1"
+  },
+  "peerDependencies": {
+    "@opentelemetry/api": ">=1 <2"
+  },
+  "devDependencies": {
+    "@opentelemetry/sdk-trace-node": "^1.18.1"
+  }
+}
