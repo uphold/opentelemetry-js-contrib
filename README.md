@@ -8,6 +8,7 @@ This repository is setup as a mono-repository and all packages live under [`pack
 
 | Name | Description |
 |------|-------------|
+| [`@uphold/opentelemetry-baggage-span-processor`](./packages/opentelemetry-baggage-span-processor/) | Package that sets all baggage entries as span attributes |
 | [`@uphold/opentelemetry-mutable-baggage`](./packages/opentelemetry-mutable-baggage/) | Package that allows an OpenTelemetry baggage to be mutable |
 
 ## Tests
