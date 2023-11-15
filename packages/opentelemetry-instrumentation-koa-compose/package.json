@@ -1,0 +1,55 @@
+{
+  "name": "@uphold/opentelemetry-instrumentation-koa-compose",
+  "version": "0.0.1",
+  "description": "Package that instruments koa-compose.",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "author": "Uphold",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uphold/opentelemetry-js-contrib.git"
+  },
+  "keywords": [
+    "opentelemetry",
+    "instrumentation",
+    "nodejs",
+    "tracing",
+    "koa-compose",
+    "span"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "lint": "eslint --ext .ts,.js .",
+    "postlint": "tsc --noEmit",
+    "release": "release-it",
+    "test": "vitest"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --ext .ts,.js"
+    ]
+  },
+  "dependencies": {
+    "@opentelemetry/instrumentation": "^0.45.1"
+  },
+  "peerDependencies": {
+    "@opentelemetry/api": ">=1 <2"
+  },
+  "devDependencies": {
+    "@opentelemetry/instrumentation": "^0.45.1",
+    "@types/koa": "^2.13.11",
+    "@types/koa-compose": "^3.2.8",
+    "koa": "^2.14.2",
+    "koa-compose": "^4.1.0"
+  }
+}
