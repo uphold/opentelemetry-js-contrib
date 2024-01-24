@@ -42,9 +42,6 @@
       "eslint --ext .ts,.js"
     ]
   },
-  "dependencies": {
-    "@opentelemetry/sdk-trace-base": "^1.18.1"
-  },
   "peerDependencies": {
     "@opentelemetry/api": ">=1 <2"
   },
