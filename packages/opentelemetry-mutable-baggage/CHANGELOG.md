@@ -1,5 +1,8 @@
 # Changelog
 
+## [@uphold/opentelemetry-mutable-baggage@v0.0.4](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-mutable-baggage@v0.0.4) (2024-05-08)
+- Bump opentelemetry dependencies [\#25](https://github.com/uphold/opentelemetry-js-contrib/pull/25) ([diogotorres97](https://github.com/diogotorres97))
+
 ## [@uphold/opentelemetry-mutable-baggage@v0.0.3](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-mutable-baggage@v0.0.3) (2023-11-03)
 - Fix changelog generator [\#13](https://github.com/uphold/opentelemetry-js-contrib/pull/13) ([diogotorres97](https://github.com/diogotorres97))
 

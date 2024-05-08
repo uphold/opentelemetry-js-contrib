@@ -1,6 +1,6 @@
 {
   "name": "@uphold/opentelemetry-mutable-baggage",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Package that allows an OpenTelemetry baggage to be mutable.",
   "main": "dist/index.js",
   "files": [
