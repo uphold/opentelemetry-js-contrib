@@ -21,8 +21,8 @@
     "lint-staged"
   ],
   "devDependencies": {
-    "@opentelemetry/api": "^1.6.0",
-    "@opentelemetry/core": "^1.17.1",
+    "@opentelemetry/api": "^1.8.0",
+    "@opentelemetry/core": "^1.24.1",
     "@types/node": "^20.11.6",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",

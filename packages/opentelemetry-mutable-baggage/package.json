@@ -39,12 +39,12 @@
     ]
   },
   "dependencies": {
-    "@opentelemetry/core": "^1.17.1"
+    "@opentelemetry/core": "^1.24.1"
   },
   "peerDependencies": {
     "@opentelemetry/api": ">=1 <2"
   },
   "devDependencies": {
-    "@opentelemetry/context-async-hooks": "^1.17.1"
+    "@opentelemetry/context-async-hooks": "^1.24.1"
   }
 }
