@@ -1,6 +1,6 @@
 {
   "name": "@uphold/opentelemetry-baggage-span-processor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Package that sets all baggage entries as span attributes.",
   "main": "dist/index.js",
   "files": [
