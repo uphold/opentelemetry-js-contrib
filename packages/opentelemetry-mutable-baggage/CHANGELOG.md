@@ -1,5 +1,8 @@
 # Changelog
 
+## [@uphold/opentelemetry-mutable-baggage@v1.1.0](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-mutable-baggage@v1.1.0) (2024-12-25)
+- Prepare for v1 release [\#33](https://github.com/uphold/opentelemetry-js-contrib/pull/33) ([satazor](https://github.com/satazor))
+
 ## [@uphold/opentelemetry-mutable-baggage@v0.0.5](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-mutable-baggage@v0.0.5) (2024-12-25)
 - Fix release-it not using the right config [\#32](https://github.com/uphold/opentelemetry-js-contrib/pull/32) ([satazor](https://github.com/satazor))
 - Upgrade all dependencies [\#31](https://github.com/uphold/opentelemetry-js-contrib/pull/31) ([satazor](https://github.com/satazor))
