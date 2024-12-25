@@ -1,5 +1,9 @@
 # Changelog
 
+## [@uphold/opentelemetry-baggage-span-processor@v0.3.0](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-baggage-span-processor@v0.3.0) (2024-12-25)
+- Fix release-it not using the right config [\#32](https://github.com/uphold/opentelemetry-js-contrib/pull/32) ([satazor](https://github.com/satazor))
+- Upgrade all dependencies [\#31](https://github.com/uphold/opentelemetry-js-contrib/pull/31) ([satazor](https://github.com/satazor))
+
 ## [@uphold/opentelemetry-baggage-span-processor@v0.2.0](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-baggage-span-processor@v0.2.0) (2024-05-08)
 - Bump opentelemetry dependencies [\#25](https://github.com/uphold/opentelemetry-js-contrib/pull/25) ([diogotorres97](https://github.com/diogotorres97))
 
