@@ -27,7 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",
     "@uphold/github-changelog-generator": "^3.4.0",
-    "@vitest/coverage-v8": "^2.1.8",
+    "@vitest/coverage-v8": "^2.1.9",
     "eslint": "~8.57.1",
     "eslint-config-uphold": "^6.0.0",
     "eslint-plugin-import": "^2.31.0",
@@ -37,7 +37,7 @@
     "prettier": "^2.8.8",
     "release-it": "^17.11.0",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.9"
   },
   "engines": {
     "node": ">=18"
