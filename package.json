@@ -21,25 +21,23 @@
     "lint-staged"
   ],
   "devDependencies": {
+    "@fastify/pre-commit": "^2.2.0",
     "@opentelemetry/api": "^1.9.0",
-    "@opentelemetry/core": "^1.30.0",
+    "@opentelemetry/core": "^2.0.0",
     "@types/node": "^22.10.2",
-    "@typescript-eslint/eslint-plugin": "^8.18.2",
-    "@typescript-eslint/parser": "^8.18.2",
-    "@uphold/github-changelog-generator": "^3.4.0",
-    "@vitest/coverage-v8": "^2.1.8",
-    "eslint": "~8.57.1",
-    "eslint-config-uphold": "^6.0.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-vitest": "^0.5.4",
-    "lint-staged": "^15.2.11",
-    "pre-commit": "^1.2.2",
-    "prettier": "^2.8.8",
-    "release-it": "^17.11.0",
-    "typescript": "^5.7.2",
-    "vitest": "^2.1.8"
+    "@uphold/github-changelog-generator": "^4.0.2",
+    "@vitest/coverage-v8": "^3.1.2",
+    "@vitest/eslint-plugin": "^1.1.44",
+    "eslint": "~9.23.0",
+    "eslint-config-uphold": "^6.4.1",
+    "lint-staged": "^15.5.1",
+    "prettier": "^3.0.0",
+    "release-it": "^19.0.1",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.1",
+    "vitest": "^3.1.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }
