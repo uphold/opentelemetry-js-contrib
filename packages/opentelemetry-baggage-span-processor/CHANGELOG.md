@@ -1,5 +1,9 @@
 # Changelog
 
+## [@uphold/opentelemetry-baggage-span-processor@v2.0.0](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-baggage-span-processor@v2.0.0) (2025-05-04)
+
+- Update otel to v2 as well as all dependencies [\#36](https://github.com/uphold/opentelemetry-js-contrib/pull/36) ([satazor](https://github.com/satazor))
+
 ## [@uphold/opentelemetry-baggage-span-processor@v1.1.0](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-baggage-span-processor@v1.1.0) (2024-12-25)
 - Prepare for v1 release [\#33](https://github.com/uphold/opentelemetry-js-contrib/pull/33) ([satazor](https://github.com/satazor))
 
