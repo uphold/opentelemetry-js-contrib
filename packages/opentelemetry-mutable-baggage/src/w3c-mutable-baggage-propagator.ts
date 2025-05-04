@@ -1,4 +1,10 @@
 import {
+  BAGGAGE_HEADER,
+  BAGGAGE_ITEMS_SEPARATOR,
+  BAGGAGE_MAX_NAME_VALUE_PAIRS,
+  BAGGAGE_MAX_PER_NAME_VALUE_PAIRS
+} from './constants';
+import {
   BaggageEntry,
   Context,
   TextMapGetter,
@@ -7,12 +13,8 @@ import {
   propagation
 } from '@opentelemetry/api';
 import { MutableBaggageImpl } from './mutable-baggage-impl';
-import { baggageUtils, isTracingSuppressed } from '@opentelemetry/core';
-
-const BAGGAGE_HEADER = 'baggage';
-const BAGGAGE_ITEMS_SEPARATOR = ',';
-const BAGGAGE_MAX_NAME_VALUE_PAIRS = 180;
-const BAGGAGE_MAX_PER_NAME_VALUE_PAIRS = 4096;
+import { getKeyPairs, parsePairKeyValue, serializeKeyPairs } from './utils';
+import { isTracingSuppressed } from '@opentelemetry/core';
 
 export class W3CMutableBaggagePropagator implements TextMapPropagator {
   inject(context: Context, carrier: unknown, setter: TextMapSetter): void {
@@ -22,12 +24,10 @@ export class W3CMutableBaggagePropagator implements TextMapPropagator {
       return;
     }
 
-    const keyPairs = baggageUtils
-      .getKeyPairs(baggage)
-      .filter(pair => pair.length <= BAGGAGE_MAX_PER_NAME_VALUE_PAIRS)
+    const keyPairs = getKeyPairs(baggage)
+      .filter((pair: string) => pair.length <= BAGGAGE_MAX_PER_NAME_VALUE_PAIRS)
       .slice(0, BAGGAGE_MAX_NAME_VALUE_PAIRS);
-
-    const headerValue = baggageUtils.serializeKeyPairs(keyPairs);
+    const headerValue = serializeKeyPairs(keyPairs);
 
     if (headerValue.length > 0) {
       setter.set(carrier, BAGGAGE_HEADER, headerValue);
@@ -38,11 +38,11 @@ export class W3CMutableBaggagePropagator implements TextMapPropagator {
     const headerValue = getter.get(carrier, BAGGAGE_HEADER);
     const baggageString = Array.isArray(headerValue) ? headerValue.join(BAGGAGE_ITEMS_SEPARATOR) : headerValue;
 
-    const entries = {} as Record<string, BaggageEntry>;
+    const entries: Record<string, BaggageEntry> = {};
     const pairs = (baggageString ?? '').split(BAGGAGE_ITEMS_SEPARATOR);
 
     pairs.forEach(entry => {
-      const keyPair = baggageUtils.parsePairKeyValue(entry);
+      const keyPair = parsePairKeyValue(entry);
 
       if (keyPair) {
         const baggageEntry: BaggageEntry = { value: keyPair.value };

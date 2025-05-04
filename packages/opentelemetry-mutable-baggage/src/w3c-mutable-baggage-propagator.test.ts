@@ -148,6 +148,7 @@ describe('.extract()', () => {
     const extractedContext = mutableBaggagePropagator.extract(ROOT_CONTEXT, carrier, defaultTextMapGetter);
     const extractedBaggage = propagation.getBaggage(extractedContext);
 
+    expect(extractedBaggage).toBeInstanceOf(MutableBaggageImpl);
     expect(JSON.stringify(extractedBaggage?.getAllEntries())).toEqual(JSON.stringify(expected.getAllEntries()));
   });
 
@@ -157,6 +158,7 @@ describe('.extract()', () => {
       mutableBaggagePropagator.extract(ROOT_CONTEXT, carrier, defaultTextMapGetter)
     );
 
+    expect(extractedBaggage).toBeInstanceOf(MutableBaggageImpl);
     expect(JSON.stringify(extractedBaggage?.getAllEntries())).toEqual(JSON.stringify(expected.getAllEntries()));
   });
 
@@ -169,7 +171,16 @@ describe('.extract()', () => {
     const extractedContext = mutableBaggagePropagator.extract(ROOT_CONTEXT, carrier, defaultTextMapGetter);
     const extractedBaggage = propagation.getBaggage(extractedContext);
 
+    expect(extractedBaggage).toBeInstanceOf(MutableBaggageImpl);
     expect(JSON.stringify(extractedBaggage?.getAllEntries())).toEqual(JSON.stringify(expected.getAllEntries()));
+  });
+
+  it('should set baggage even if carrier is empty', () => {
+    const extractedContext = mutableBaggagePropagator.extract(ROOT_CONTEXT, carrier, defaultTextMapGetter);
+    const extractedBaggage = propagation.getBaggage(extractedContext);
+
+    expect(extractedBaggage).toBeInstanceOf(MutableBaggageImpl);
+    expect(JSON.stringify(extractedBaggage?.getAllEntries())).toEqual('[]');
   });
 });
 

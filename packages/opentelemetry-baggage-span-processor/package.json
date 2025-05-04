@@ -27,25 +27,25 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "lint": "eslint --ext .ts,.js .",
+    "lint": "eslint",
     "postlint": "tsc --noEmit",
     "release": "release-it --config ../../.release-it.js",
     "test": "vitest"
   },
   "lint-staged": {
     "*.{ts,js}": [
-      "eslint --ext .ts,.js"
+      "eslint"
     ]
   },
   "peerDependencies": {
     "@opentelemetry/api": ">=1 <2"
   },
   "devDependencies": {
-    "@opentelemetry/sdk-trace-node": "^1.30.0"
+    "@opentelemetry/sdk-trace-node": "^2.0.0"
   }
 }
