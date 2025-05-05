@@ -5,7 +5,11 @@ import vitest from '@vitest/eslint-plugin';
 export default tseslint.config([
   {
     extends: [uphold],
-    name: 'uphold-config'
+    name: 'uphold-config',
+    rules: {
+      'no-eq-null': 'off',
+      'no-underscore-dangle': 'off'
+    }
   },
   tseslint.configs.recommended,
   {
