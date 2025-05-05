@@ -6,7 +6,7 @@
     "declarationMap": true,
     "forceConsistentCasingInFileNames": true,
     "inlineSources": true,
-    "module": "commonjs",
+    "module": "node16",
     "newLine": "LF",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,

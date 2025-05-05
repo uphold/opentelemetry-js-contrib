@@ -1,0 +1,59 @@
+{
+  "name": "@uphold/opentelemetry-connect-node",
+  "version": "1.0.0",
+  "description": "OpenTelemetry instrumentation for `@connectrpc/connect-node` RPC client and server",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "author": "Uphold",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uphold/opentelemetry-js-contrib.git"
+  },
+  "keywords": [
+    "opentelemetry",
+    "instrumentation",
+    "nodejs",
+    "tracing",
+    "connectrpc",
+    "connect-es",
+    "grpc",
+    "rpc"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "lint": "eslint",
+    "postlint": "tsc --noEmit",
+    "release": "release-it --config ../../.release-it.js",
+    "test": "vitest"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint"
+    ]
+  },
+  "dependencies": {
+    "@opentelemetry/instrumentation": "^0.200.0",
+    "@opentelemetry/semantic-conventions": "~1.32.0",
+    "lodash": "^4.17.21"
+  },
+  "peerDependencies": {
+    "@opentelemetry/api": ">=1 <2"
+  },
+  "devDependencies": {
+    "@connectrpc/connect": "^2.0.2",
+    "@connectrpc/connect-node": "^2.0.2",
+    "@opentelemetry/sdk-trace-base": "^2.0.0",
+    "@opentelemetry/sdk-trace-node": "^2.0.0",
+    "@types/lodash": "^4.17.16"
+  }
+}
