@@ -129,6 +129,12 @@ const createEndSpanWithError = (config: ConnectNodeInstrumentationConfig, kind: 
   };
 };
 
+const carrierSetterAndGetter = {
+  get: (carrier: Headers, key: string) => carrier.get(key) || undefined,
+  keys: (carrier: Headers) => Array.from(carrier.keys()),
+  set: (carrier: Headers, key: string, value: string) => carrier.set(key, value)
+};
+
 export const createInterceptor = (
   config: ConnectNodeInstrumentationConfig,
   diag: DiagLogger,
@@ -165,9 +171,9 @@ export const createInterceptor = (
       const span = startSpan(req);
 
       if (kind === 'server') {
-        ctx = propagation.extract(ctx, req.header);
+        ctx = propagation.extract(ctx, req.header, carrierSetterAndGetter);
       } else {
-        propagation.inject(ctx, req.header);
+        propagation.inject(ctx, req.header, carrierSetterAndGetter);
       }
 
       try {
