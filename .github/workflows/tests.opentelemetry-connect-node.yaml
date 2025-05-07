@@ -1,0 +1,35 @@
+name: Tests - opentelemetry-connect-node
+
+on:
+  push:
+    paths:
+    - '*'
+    - 'packages/opentelemetry-connect-node/**'
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    env:
+      NPM_WORKSPACE: packages/opentelemetry-connect-node
+    strategy:
+      matrix:
+        node: [20, 22]
+    name: Node v${{ matrix.node }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js version
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node }}
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run lint
+      run: npm run lint --workspace $NPM_WORKSPACE
+
+    - name: Run tests
+      run: npm run test --workspace $NPM_WORKSPACE
