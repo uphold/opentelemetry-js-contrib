@@ -1,16 +1,16 @@
-name: Tests - opentelemetry-connect-node
+name: Tests - opentelemetry-instrumentation-connect-node
 
 on:
   push:
     paths:
     - '*'
-    - 'packages/opentelemetry-connect-node/**'
+    - 'packages/opentelemetry-instrumentation-connect-node/**'
 
 jobs:
   unit:
     runs-on: ubuntu-latest
     env:
-      NPM_WORKSPACE: packages/opentelemetry-connect-node
+      NPM_WORKSPACE: packages/opentelemetry-instrumentation-connect-node
     strategy:
       matrix:
         node: [20, 22]
