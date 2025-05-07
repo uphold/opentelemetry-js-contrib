@@ -9,6 +9,7 @@ on:
         type: choice
         options:
         - opentelemetry-baggage-span-processor
+        - opentelemetry-connect-node
         - opentelemetry-mutable-baggage
         required: true
       VERSION_BUMP:
