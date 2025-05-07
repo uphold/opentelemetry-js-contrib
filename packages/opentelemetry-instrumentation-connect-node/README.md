@@ -1,11 +1,11 @@
-# @uphold/opentelemetry-connect-node
+# @uphold/opentelemetry-instrumentation-connect-node
 
-OpenTelemetry instrumentation for `@connectrpc/connect-node` RPC client and server.
+OpenTelemetry instrumentation for [`@connectrpc/connect-node`](https://www.npmjs.com/package/@connectrpc/connect-node) RPC client and server.
 
 ## Installation
 
 ```sh
-npm install @uphold/opentelemetry-connect-node
+npm install @uphold/opentelemetry-instrumentation-connect-node
 ```
 
 ## Supported versions
@@ -19,7 +19,7 @@ Enable the instrumentation offered by this package, like so:
 ```js
 const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
 const { registerInstrumentations } = require('@opentelemetry/instrumentation');
-const { ConnectNodeInstrumentation } = require('@uphold/opentelemetry-connect-node');
+const { ConnectNodeInstrumentation } = require('@uphold/opentelemetry-instrumentation-connect-node');
 
 const provider = new NodeTracerProvider({
   spanProcessors: [new SimpleSpanProcessor(new ConsoleSpanExporter())]

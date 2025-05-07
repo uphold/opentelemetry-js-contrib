@@ -15,7 +15,7 @@ import packageJson from '../package.json';
 
 export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeInstrumentationConfig> {
   constructor(config: ConnectNodeInstrumentationConfig = {}) {
-    super('@uphold/opentelemetry-connect-node', packageJson.version, config);
+    super('@uphold/opentelemetry-instrumentation-connect-node', packageJson.version, config);
   }
 
   init() {
