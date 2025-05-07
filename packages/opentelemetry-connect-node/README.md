@@ -10,7 +10,7 @@ npm install @uphold/opentelemetry-connect-node
 
 ## Supported versions
 
-- [`@connectrpc/connect-node`](https://www.npmjs.com/package/@connectrpc/connect-node) versions ^2.0.0
+- [`@connectrpc/connect-node`](https://www.npmjs.com/package/@connectrpc/connect-node) versions `^2.0.0`
 
 ## Usage
 
@@ -38,7 +38,7 @@ The instrumentation accepts the following configuration:
 
 | Options | Type | Description |
 | ------- | ---- | ----------- |
-| `ignoreRequest` | `IgnoreRequestMatcher` | The instrumentation will not trace any requests return `true` from the function.                                                                                                    |
+| `ignoreRequest` | `IgnoreRequestMatcher` | The instrumentation will not trace any requests return `true` from the function. |
 | `metadataToSpanAttributes` | `MetadataToSpanAttributes` | List of case insensitive metadata to convert to span attributes. Client and server (outgoing requests, incoming responses) metadata attributes will be converted to span attributes in the form of `rpc.{rpc_system}{request/response}.metadata.metadata_key`, e.g. `rpc.grpc.response.metadata.date` |
 
 ## Caveats
