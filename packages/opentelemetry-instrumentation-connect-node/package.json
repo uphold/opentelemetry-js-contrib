@@ -1,6 +1,6 @@
 {
   "name": "@uphold/opentelemetry-instrumentation-connect-node",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OpenTelemetry instrumentation for `@connectrpc/connect-node` RPC client and server",
   "main": "dist/index.js",
   "files": [
