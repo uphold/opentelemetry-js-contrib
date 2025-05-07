@@ -130,7 +130,7 @@ const createEndSpanWithError = (config: ConnectNodeInstrumentationConfig, kind: 
 };
 
 const carrierSetterAndGetter = {
-  get: (carrier: Headers, key: string) => carrier.get(key) || undefined,
+  get: (carrier: Headers, key: string) => carrier.get(key) ?? undefined,
   keys: (carrier: Headers) => Array.from(carrier.keys()),
   set: (carrier: Headers, key: string, value: string) => carrier.set(key, value)
 };
