@@ -11,10 +11,11 @@ import type {
 import { ConnectNodeInstrumentationConfig } from './types';
 import { InstrumentationBase, InstrumentationNodeModuleDefinition } from '@opentelemetry/instrumentation';
 import { createInterceptor } from './interceptor';
+import packageJson from '../package.json';
 
 export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeInstrumentationConfig> {
   constructor(config: ConnectNodeInstrumentationConfig = {}) {
-    super('@uphold/opentelemetry-connect-node', '1.0.0', config);
+    super('@uphold/opentelemetry-connect-node', packageJson.version, config);
   }
 
   init() {
