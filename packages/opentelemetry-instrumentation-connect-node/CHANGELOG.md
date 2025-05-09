@@ -1,5 +1,10 @@
 # Changelog
 
+## [@uphold/opentelemetry-instrumentation-connect-node@v0.1.4](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-instrumentation-connect-node@v0.1.4) (2025-05-09)
+
+- Remove unnecessary interceptor argument [\#48](https://github.com/uphold/opentelemetry-js-contrib/pull/48) ([satazor](https://github.com/satazor))
+- Fix some more issues with client & server propagation [\#47](https://github.com/uphold/opentelemetry-js-contrib/pull/47) ([satazor](https://github.com/satazor))
+
 ## [@uphold/opentelemetry-instrumentation-connect-node@v0.1.3](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-instrumentation-connect-node@v0.1.3) (2025-05-09)
 
 - Fix wrong bind on the `next` middleware function [\#46](https://github.com/uphold/opentelemetry-js-contrib/pull/46) ([satazor](https://github.com/satazor))
