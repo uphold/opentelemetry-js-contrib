@@ -135,15 +135,10 @@ const carrierSetterAndGetter = {
   set: (carrier: Headers, key: string, value: string) => carrier.set(key, value)
 };
 
-export const createClientInterceptor = (
-  config: ConnectNodeInstrumentationConfig,
-  diag: DiagLogger,
-  tracer: Tracer,
-  kind: RpcKind
-) => {
-  const startSpan = createStartSpan(config, tracer, kind);
-  const endSpanWithSuccess = createEndSpanWithSuccess(config, kind);
-  const endSpanWithError = createEndSpanWithError(config, kind);
+export const createClientInterceptor = (config: ConnectNodeInstrumentationConfig, diag: DiagLogger, tracer: Tracer) => {
+  const startSpan = createStartSpan(config, tracer, 'client');
+  const endSpanWithSuccess = createEndSpanWithSuccess(config, 'client');
+  const endSpanWithError = createEndSpanWithError(config, 'client');
 
   return (next: InterceptorAnyFn): InterceptorAnyFn =>
     async req => {
@@ -187,15 +182,10 @@ export const createClientInterceptor = (
     };
 };
 
-export const createServerInterceptor = (
-  config: ConnectNodeInstrumentationConfig,
-  diag: DiagLogger,
-  tracer: Tracer,
-  kind: RpcKind
-) => {
-  const startSpan = createStartSpan(config, tracer, kind);
-  const endSpanWithSuccess = createEndSpanWithSuccess(config, kind);
-  const endSpanWithError = createEndSpanWithError(config, kind);
+export const createServerInterceptor = (config: ConnectNodeInstrumentationConfig, diag: DiagLogger, tracer: Tracer) => {
+  const startSpan = createStartSpan(config, tracer, 'server');
+  const endSpanWithSuccess = createEndSpanWithSuccess(config, 'server');
+  const endSpanWithError = createEndSpanWithError(config, 'server');
 
   return (next: InterceptorAnyFn): InterceptorAnyFn =>
     async req => {
