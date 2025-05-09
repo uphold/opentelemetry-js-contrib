@@ -1,5 +1,9 @@
 # Changelog
 
+## [@uphold/opentelemetry-instrumentation-connect-node@v0.1.3](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-instrumentation-connect-node@v0.1.3) (2025-05-09)
+
+- Fix wrong bind on the `next` middleware function [\#46](https://github.com/uphold/opentelemetry-js-contrib/pull/46) ([satazor](https://github.com/satazor))
+
 ## [@uphold/opentelemetry-instrumentation-connect-node@v0.1.2](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-instrumentation-connect-node@v0.1.2) (2025-05-07)
 
 - Fix extracting empty strings from carrier [\#45](https://github.com/uphold/opentelemetry-js-contrib/pull/45) ([satazor](https://github.com/satazor))
