@@ -135,7 +135,7 @@ const carrierSetterAndGetter = {
   set: (carrier: Headers, key: string, value: string) => carrier.set(key, value)
 };
 
-export const createInterceptor = (
+export const createClientInterceptor = (
   config: ConnectNodeInstrumentationConfig,
   diag: DiagLogger,
   tracer: Tracer,
@@ -167,18 +167,11 @@ export const createInterceptor = (
         return await next(req);
       }
 
-      let ctx = context.active();
       const span = startSpan(req);
 
-      if (kind === 'server') {
-        ctx = propagation.extract(ctx, req.header, carrierSetterAndGetter);
-      } else {
-        propagation.inject(ctx, req.header, carrierSetterAndGetter);
-      }
-
       try {
-        return await context.with(trace.setSpan(ctx, span), async () => {
-          next = context.bind(context.active(), next);
+        return await context.with(trace.setSpan(context.active(), span), async () => {
+          propagation.inject(context.active(), req.header, carrierSetterAndGetter);
 
           const res = await next(req);
 
@@ -191,5 +184,57 @@ export const createInterceptor = (
 
         throw err;
       }
+    };
+};
+
+export const createServerInterceptor = (
+  config: ConnectNodeInstrumentationConfig,
+  diag: DiagLogger,
+  tracer: Tracer,
+  kind: RpcKind
+) => {
+  const startSpan = createStartSpan(config, tracer, kind);
+  const endSpanWithSuccess = createEndSpanWithSuccess(config, kind);
+  const endSpanWithError = createEndSpanWithError(config, kind);
+
+  return (next: InterceptorAnyFn): InterceptorAnyFn =>
+    async req => {
+      // Only unary requests are supported due to a bug in Node.js async context propagation on generator functions.
+      // See https://github.com/open-telemetry/opentelemetry-js/issues/2951 and https://github.com/nodejs/node/issues/42237
+      if (req.method.methodKind !== 'unary') {
+        return await next(req);
+      }
+
+      const shouldIgnoreRequest = safeExecuteInTheMiddle(
+        () => config.ignoreRequest?.(req) === true,
+        (err: unknown) => {
+          if (err != null) {
+            diag.error('caught ignoreRequest error: ', err);
+          }
+        },
+        true
+      );
+
+      if (shouldIgnoreRequest) {
+        return await next(req);
+      }
+
+      return await context.with(propagation.extract(context.active(), req.header, carrierSetterAndGetter), async () => {
+        const span = startSpan(req);
+
+        try {
+          return await context.with(trace.setSpan(context.active(), span), async () => {
+            const res = await next(req);
+
+            endSpanWithSuccess(span as Span, res);
+
+            return res;
+          });
+        } catch (err) {
+          endSpanWithError(span as Span, err);
+
+          throw err;
+        }
+      });
     };
 };

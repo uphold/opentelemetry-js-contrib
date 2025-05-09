@@ -10,7 +10,7 @@ import type {
 } from '@connectrpc/connect-node';
 import { ConnectNodeInstrumentationConfig } from './types';
 import { InstrumentationBase, InstrumentationNodeModuleDefinition } from '@opentelemetry/instrumentation';
-import { createInterceptor } from './interceptor';
+import { createClientInterceptor, createServerInterceptor } from './interceptor';
 import packageJson from '../package.json';
 
 export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeInstrumentationConfig> {
@@ -50,7 +50,7 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched createConnectTransport');
 
       return (options: ConnectTransportOptions) => {
-        const interceptor = createInterceptor(this.getConfig(), this._diag, this.tracer, 'client');
+        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer, 'client');
 
         return original({
           ...options,
@@ -65,7 +65,7 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched createGrpcTransport');
 
       return (options: GrpcTransportOptions) => {
-        const interceptor = createInterceptor(this.getConfig(), this._diag, this.tracer, 'client');
+        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer, 'client');
 
         return original({
           ...options,
@@ -80,7 +80,7 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched createGrpcWebTransport');
 
       return (options: GrpcWebTransportOptions) => {
-        const interceptor = createInterceptor(this.getConfig(), this._diag, this.tracer, 'client');
+        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer, 'client');
 
         return original({
           ...options,
@@ -95,7 +95,7 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched connectNodeAdapter');
 
       return (options: ConnectNodeAdapterOptions) => {
-        const interceptor = createInterceptor(this.getConfig(), this._diag, this.tracer, 'server');
+        const interceptor = createServerInterceptor(this.getConfig(), this._diag, this.tracer, 'server');
 
         return original({
           ...options,
