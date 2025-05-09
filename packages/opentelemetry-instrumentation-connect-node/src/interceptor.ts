@@ -178,7 +178,7 @@ export const createInterceptor = (
 
       try {
         return await context.with(trace.setSpan(ctx, span), async () => {
-          next = context.bind(ctx, next);
+          next = context.bind(context.active(), next);
 
           const res = await next(req);
 
