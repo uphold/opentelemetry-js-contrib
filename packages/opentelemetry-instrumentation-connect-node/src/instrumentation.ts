@@ -50,7 +50,7 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched createConnectTransport');
 
       return (options: ConnectTransportOptions) => {
-        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer, 'client');
+        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer);
 
         return original({
           ...options,
@@ -65,7 +65,7 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched createGrpcTransport');
 
       return (options: GrpcTransportOptions) => {
-        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer, 'client');
+        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer);
 
         return original({
           ...options,
@@ -80,7 +80,7 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched createGrpcWebTransport');
 
       return (options: GrpcWebTransportOptions) => {
-        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer, 'client');
+        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer);
 
         return original({
           ...options,
@@ -95,7 +95,7 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched connectNodeAdapter');
 
       return (options: ConnectNodeAdapterOptions) => {
-        const interceptor = createServerInterceptor(this.getConfig(), this._diag, this.tracer, 'server');
+        const interceptor = createServerInterceptor(this.getConfig(), this._diag, this.tracer);
 
         return original({
           ...options,
