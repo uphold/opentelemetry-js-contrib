@@ -1,0 +1,57 @@
+{
+  "name": "@uphold/opentelemetry-instrumentation-temporalio-sdk",
+  "version": "0.1.0",
+  "description": "OpenTelemetry instrumentation for Temporal SDK that automatically installs interceptors",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "author": "Uphold",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uphold/opentelemetry-js-contrib.git"
+  },
+  "keywords": [
+    "opentelemetry",
+    "instrumentation",
+    "nodejs",
+    "tracing",
+    "temporal",
+    "temporalio",
+    "workflow"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "lint": "eslint",
+    "postlint": "tsc --noEmit",
+    "release": "release-it --config ../../.release-it.js",
+    "test": "vitest"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint"
+    ]
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/instrumentation": "^0.200.0"
+  },
+  "peerDependencies": {
+    "@temporalio/client": "^1.0.0",
+    "@temporalio/worker": "^1.0.0"
+  },
+  "devDependencies": {
+    "@temporalio/client": "^1.13.0",
+    "@temporalio/worker": "^1.13.0",
+    "@opentelemetry/sdk-trace-base": "^2.0.0",
+    "@opentelemetry/sdk-trace-node": "^2.0.0"
+  }
+}
