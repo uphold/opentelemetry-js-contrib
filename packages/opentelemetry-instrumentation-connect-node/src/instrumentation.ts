@@ -10,7 +10,7 @@ import type {
 } from '@connectrpc/connect-node';
 import { ConnectNodeInstrumentationConfig } from './types';
 import { InstrumentationBase, InstrumentationNodeModuleDefinition } from '@opentelemetry/instrumentation';
-import { createClientInterceptor, createServerInterceptor } from './interceptor';
+import { createClientInterceptor, createServerInterceptor } from './interceptors';
 import packageJson from '../package.json';
 
 export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeInstrumentationConfig> {
