@@ -21,23 +21,23 @@
     "lint-staged"
   ],
   "devDependencies": {
-    "@fastify/pre-commit": "^2.2.0",
+    "@fastify/pre-commit": "^2.2.1",
     "@opentelemetry/api": "^1.9.0",
-    "@opentelemetry/core": "^2.0.0",
-    "@types/node": "^22.10.2",
+    "@opentelemetry/core": "^2.5.0",
+    "@types/node": "^22.12.0",
     "@uphold/github-changelog-generator": "^4.0.2",
-    "@vitest/coverage-v8": "^3.1.2",
-    "@vitest/eslint-plugin": "^1.1.44",
-    "eslint": "~9.23.0",
-    "eslint-config-uphold": "^6.4.1",
-    "lint-staged": "^15.5.1",
-    "prettier": "^3.0.0",
-    "release-it": "^19.0.1",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.31.1",
-    "vitest": "^3.1.2"
+    "@vitest/coverage-v8": "^4.0.18",
+    "@vitest/eslint-plugin": "^1.6.6",
+    "eslint": "~9.39.2",
+    "eslint-config-uphold": "^6.10.1",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1",
+    "release-it": "^19.2.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.1",
+    "vitest": "^4.0.18"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   }
 }

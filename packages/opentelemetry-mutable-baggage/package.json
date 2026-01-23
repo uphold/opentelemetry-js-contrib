@@ -23,7 +23,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "prebuild": "rm -rf dist",
@@ -39,12 +39,12 @@
     ]
   },
   "dependencies": {
-    "@opentelemetry/core": "^2.0.0"
+    "@opentelemetry/core": "^2.5.0"
   },
   "peerDependencies": {
     "@opentelemetry/api": ">=1 <2"
   },
   "devDependencies": {
-    "@opentelemetry/context-async-hooks": "^2.0.0"
+    "@opentelemetry/context-async-hooks": "^2.5.0"
   }
 }

@@ -26,7 +26,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "prebuild": "rm -rf dist",
@@ -42,18 +42,18 @@
     ]
   },
   "dependencies": {
-    "@opentelemetry/instrumentation": "^0.200.0",
-    "@opentelemetry/semantic-conventions": "~1.32.0",
-    "lodash": "^4.17.21"
+    "@opentelemetry/instrumentation": "^0.211.0",
+    "@opentelemetry/semantic-conventions": "~1.29.0",
+    "lodash": "^4.17.23"
   },
   "peerDependencies": {
     "@opentelemetry/api": ">=1 <2"
   },
   "devDependencies": {
-    "@connectrpc/connect": "^2.0.2",
-    "@connectrpc/connect-node": "^2.0.2",
-    "@opentelemetry/sdk-trace-base": "^2.0.0",
-    "@opentelemetry/sdk-trace-node": "^2.0.0",
-    "@types/lodash": "^4.17.16"
+    "@connectrpc/connect": "^2.1.1",
+    "@connectrpc/connect-node": "^2.1.1",
+    "@opentelemetry/sdk-trace-base": "^2.5.0",
+    "@opentelemetry/sdk-trace-node": "^2.5.0",
+    "@types/lodash": "^4.17.23"
   }
 }
