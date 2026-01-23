@@ -27,7 +27,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "prebuild": "rm -rf dist",
@@ -46,6 +46,6 @@
     "@opentelemetry/api": ">=1 <2"
   },
   "devDependencies": {
-    "@opentelemetry/sdk-trace-node": "^2.0.0"
+    "@opentelemetry/sdk-trace-node": "^2.5.0"
   }
 }
