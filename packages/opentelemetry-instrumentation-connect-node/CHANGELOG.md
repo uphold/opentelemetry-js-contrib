@@ -1,5 +1,9 @@
 # Changelog
 
+## [@uphold/opentelemetry-instrumentation-connect-node@v0.2.0](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-instrumentation-connect-node@v0.2.0) (2026-01-25)
+
+- Bump dependencies and node to `22` [\#58](https://github.com/uphold/opentelemetry-js-contrib/pull/58) ([devgusto](https://github.com/devgusto))
+
 ## [@uphold/opentelemetry-instrumentation-connect-node@v0.1.4](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-instrumentation-connect-node@v0.1.4) (2025-05-09)
 
 - Remove unnecessary interceptor argument [\#48](https://github.com/uphold/opentelemetry-js-contrib/pull/48) ([satazor](https://github.com/satazor))
