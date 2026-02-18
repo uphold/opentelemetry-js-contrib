@@ -3,11 +3,21 @@ import { Context, Span, propagation } from '@opentelemetry/api';
 export class BaggageSpanProcessor {
   onStart(span: Span, parentContext: Context): void {
     // Set all baggage entries as span attributes.
-    const baggageEntries = propagation.getBaggage(parentContext)?.getAllEntries();
+    const baggage = propagation.getBaggage(parentContext);
 
-    baggageEntries?.forEach(([key, baggageEntry]) => {
+    if (!baggage) {
+      return;
+    }
+
+    const baggageEntries = baggage.getAllEntries();
+
+    if (baggageEntries.length === 0) {
+      return;
+    }
+
+    for (const [key, baggageEntry] of baggageEntries) {
       span.setAttribute(key, baggageEntry.value);
-    });
+    }
   }
 
   onEnd(): void {}

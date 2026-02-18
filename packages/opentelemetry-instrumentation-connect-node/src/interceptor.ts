@@ -13,7 +13,7 @@ import { DiagLogger, SpanStatusCode, Tracer, context, propagation, trace } from 
 import { InterceptorAnyFn, RpcKind, RpcPhase } from './internal-types';
 import { Span } from '@opentelemetry/sdk-trace-base';
 import { errorCodeToString, isConnectError, resolveRpcSystem, rpcKindToSpanKind } from './utils';
-import { memoize } from 'lodash';
+import { memoize } from './memoize';
 import { safeExecuteInTheMiddle } from '@opentelemetry/instrumentation';
 
 const createMetadataAttributesExtractor = (

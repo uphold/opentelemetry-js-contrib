@@ -38,10 +38,10 @@ export class W3CMutableBaggagePropagator implements TextMapPropagator {
     const headerValue = getter.get(carrier, BAGGAGE_HEADER);
     const baggageString = Array.isArray(headerValue) ? headerValue.join(BAGGAGE_ITEMS_SEPARATOR) : headerValue;
 
-    const entries: Record<string, BaggageEntry> = {};
+    const entriesMap = new Map<string, BaggageEntry>();
     const pairs = (baggageString ?? '').split(BAGGAGE_ITEMS_SEPARATOR);
 
-    pairs.forEach(entry => {
+    for (const entry of pairs) {
       const keyPair = parsePairKeyValue(entry);
 
       if (keyPair) {
@@ -51,11 +51,11 @@ export class W3CMutableBaggagePropagator implements TextMapPropagator {
           baggageEntry.metadata = keyPair.metadata;
         }
 
-        entries[keyPair.key] = baggageEntry;
+        entriesMap.set(keyPair.key, baggageEntry);
       }
-    });
+    }
 
-    const baggage = new MutableBaggageImpl(new Map(Object.entries(entries)));
+    const baggage = new MutableBaggageImpl(entriesMap);
 
     return propagation.setBaggage(context, baggage);
   }

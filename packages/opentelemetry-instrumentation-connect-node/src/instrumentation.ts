@@ -14,8 +14,27 @@ import { createClientInterceptor, createServerInterceptor } from './interceptor'
 import packageJson from '../package.json';
 
 export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeInstrumentationConfig> {
+  private clientInterceptor?: ReturnType<typeof createClientInterceptor>;
+  private serverInterceptor?: ReturnType<typeof createServerInterceptor>;
+
   constructor(config: ConnectNodeInstrumentationConfig = {}) {
     super('@uphold/opentelemetry-instrumentation-connect-node', packageJson.version, config);
+  }
+
+  private _getClientInterceptor() {
+    if (!this.clientInterceptor) {
+      this.clientInterceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer);
+    }
+
+    return this.clientInterceptor;
+  }
+
+  private _getServerInterceptor() {
+    if (!this.serverInterceptor) {
+      this.serverInterceptor = createServerInterceptor(this.getConfig(), this._diag, this.tracer);
+    }
+
+    return this.serverInterceptor;
   }
 
   init() {
@@ -50,11 +69,9 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched createConnectTransport');
 
       return (options: ConnectTransportOptions) => {
-        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer);
-
         return original({
           ...options,
-          interceptors: [interceptor, ...(options.interceptors ?? [])]
+          interceptors: [this._getClientInterceptor(), ...(options.interceptors ?? [])]
         });
       };
     };
@@ -65,11 +82,9 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched createGrpcTransport');
 
       return (options: GrpcTransportOptions) => {
-        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer);
-
         return original({
           ...options,
-          interceptors: [interceptor, ...(options.interceptors ?? [])]
+          interceptors: [this._getClientInterceptor(), ...(options.interceptors ?? [])]
         });
       };
     };
@@ -80,11 +95,9 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched createGrpcWebTransport');
 
       return (options: GrpcWebTransportOptions) => {
-        const interceptor = createClientInterceptor(this.getConfig(), this._diag, this.tracer);
-
         return original({
           ...options,
-          interceptors: [interceptor, ...(options.interceptors ?? [])]
+          interceptors: [this._getClientInterceptor(), ...(options.interceptors ?? [])]
         });
       };
     };
@@ -95,11 +108,9 @@ export class ConnectNodeInstrumentation extends InstrumentationBase<ConnectNodeI
       this._diag.debug('patched connectNodeAdapter');
 
       return (options: ConnectNodeAdapterOptions) => {
-        const interceptor = createServerInterceptor(this.getConfig(), this._diag, this.tracer);
-
         return original({
           ...options,
-          interceptors: [interceptor, ...(options.interceptors ?? [])]
+          interceptors: [this._getServerInterceptor(), ...(options.interceptors ?? [])]
         });
       };
     };

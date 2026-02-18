@@ -17,11 +17,21 @@ type ParsedBaggageKeyValue = {
 };
 
 export function serializeKeyPairs(keyPairs: string[]): string {
-  return keyPairs.reduce((hValue: string, current: string) => {
-    const value = `${hValue}${hValue !== '' ? BAGGAGE_ITEMS_SEPARATOR : ''}${current}`;
+  const parts: string[] = [];
+  let totalLength = 0;
 
-    return value.length > BAGGAGE_MAX_TOTAL_LENGTH ? hValue : value;
-  }, '');
+  for (const pair of keyPairs) {
+    const newLength = totalLength + pair.length + (totalLength > 0 ? BAGGAGE_ITEMS_SEPARATOR.length : 0);
+
+    if (newLength > BAGGAGE_MAX_TOTAL_LENGTH) {
+      break;
+    }
+
+    parts.push(pair);
+    totalLength = newLength;
+  }
+
+  return parts.join(BAGGAGE_ITEMS_SEPARATOR);
 }
 
 export function getKeyPairs(baggage: Baggage): string[] {
