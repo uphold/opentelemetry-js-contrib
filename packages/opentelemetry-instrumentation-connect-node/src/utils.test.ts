@@ -2,7 +2,7 @@ import { ConnectError } from '@connectrpc/connect';
 import { RpcKind } from './internal-types';
 import { SpanKind } from '@opentelemetry/api';
 import { describe, expect, it } from 'vitest';
-import { errorCodeToString, isConnectError, resolveRpcSystem, rpcKindToSpanKind } from './utils';
+import { errorCodeToString, isConnectError, resolveRpcSystem, resolveRpcSystemName, rpcKindToSpanKind } from './utils';
 
 describe('isConnectError()', () => {
   it('should return true for a connect error', () => {
@@ -29,6 +29,21 @@ describe('resolveRpcSystem()', () => {
 
   it('should return `undefined` for everything else', () => {
     expect(resolveRpcSystem(new Headers({}))).toBe(undefined);
+  });
+});
+
+describe('resolveRpcSystemName()', () => {
+  it('should return `grpc` if `Content-Type` header starts with `application/grpc`', () => {
+    expect(resolveRpcSystemName(new Headers({ 'Content-Type': 'application/grpc' }))).toBe('grpc');
+    expect(resolveRpcSystemName(new Headers({ 'Content-Type': 'application/grpc-foo' }))).toBe('grpc');
+  });
+
+  it('should return `connectrpc` if `Connect-Protocol-Version` header is present', () => {
+    expect(resolveRpcSystemName(new Headers({ 'Connect-Protocol-Version': 'foo' }))).toBe('connectrpc');
+  });
+
+  it('should return `undefined` for everything else', () => {
+    expect(resolveRpcSystemName(new Headers({}))).toBe(undefined);
   });
 });
 
