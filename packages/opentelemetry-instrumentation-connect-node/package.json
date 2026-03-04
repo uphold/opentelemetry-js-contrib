@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@opentelemetry/instrumentation": "^0.211.0",
-    "@opentelemetry/semantic-conventions": "~1.29.0",
+    "@opentelemetry/semantic-conventions": "~1.40.0",
     "lodash": "^4.17.23"
   },
   "peerDependencies": {

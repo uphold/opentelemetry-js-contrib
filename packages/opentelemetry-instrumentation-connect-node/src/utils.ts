@@ -26,6 +26,16 @@ export const resolveRpcSystem = (header: Headers): RpcSystem => {
   return undefined;
 };
 
+export const resolveRpcSystemName = (header: Headers) => {
+  const rpcSystem = resolveRpcSystem(header);
+
+  if (rpcSystem === 'connect_rpc') {
+    return 'connectrpc';
+  }
+
+  return rpcSystem;
+};
+
 export const errorCodeToString = (code?: number) => {
   switch (code) {
     case 0:
