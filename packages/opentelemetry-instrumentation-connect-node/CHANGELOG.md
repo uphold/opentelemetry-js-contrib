@@ -1,5 +1,9 @@
 # Changelog
 
+## [@uphold/opentelemetry-instrumentation-connect-node@v0.2.2](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-instrumentation-connect-node@v0.2.2) (2026-03-04)
+
+- Fix remaining direct access to span attributes [\#63](https://github.com/uphold/opentelemetry-js-contrib/pull/63) ([satazor](https://github.com/satazor))
+
 ## [@uphold/opentelemetry-instrumentation-connect-node@v0.2.1](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-instrumentation-connect-node@v0.2.1) (2026-03-04)
 
 - Fix accessing attributes on non-recording span [\#62](https://github.com/uphold/opentelemetry-js-contrib/pull/62) ([satazor](https://github.com/satazor))
