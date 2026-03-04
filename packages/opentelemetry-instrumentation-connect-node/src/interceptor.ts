@@ -1,20 +1,25 @@
 import {
-  ATTR_RPC_CONNECT_RPC_ERROR_CODE,
-  ATTR_RPC_GRPC_STATUS_CODE,
   ATTR_RPC_METHOD,
-  ATTR_RPC_SERVICE,
-  ATTR_RPC_SYSTEM,
-  ATTR_SERVER_ADDRESS,
-  ATTR_SERVER_PORT
+  ATTR_RPC_RESPONSE_STATUS_CODE,
+  ATTR_RPC_SYSTEM_NAME,
+  ATTR_RPC_REQUEST_METADATA as rpcRequestMetadataAttributeKey,
+  ATTR_RPC_RESPONSE_METADATA as rpcResponseMetadataAttributeKey
 } from '@opentelemetry/semantic-conventions/incubating';
+import { ATTR_SERVER_ADDRESS, ATTR_SERVER_PORT } from '@opentelemetry/semantic-conventions';
 import { ConnectError, StreamRequest, StreamResponse, UnaryRequest, UnaryResponse } from '@connectrpc/connect';
 import { ConnectNodeInstrumentationConfig } from './types';
 import { DiagLogger, SpanStatusCode, Tracer, context, propagation, trace } from '@opentelemetry/api';
 import { InterceptorAnyFn, RpcKind, RpcPhase } from './internal-types';
 import { Span } from '@opentelemetry/sdk-trace-base';
-import { errorCodeToString, isConnectError, resolveRpcSystem, rpcKindToSpanKind } from './utils';
+import { errorCodeToString, isConnectError, resolveRpcSystem, resolveRpcSystemName, rpcKindToSpanKind } from './utils';
 import { memoize } from 'lodash';
 import { safeExecuteInTheMiddle } from '@opentelemetry/instrumentation';
+
+// Deprecated semantic convention attributes kept for backward compatibility with v1.29.
+const ATTR_RPC_CONNECT_RPC_ERROR_CODE = 'rpc.connect_rpc.error_code';
+const ATTR_RPC_GRPC_STATUS_CODE = 'rpc.grpc.status_code';
+const ATTR_RPC_SERVICE = 'rpc.service';
+const ATTR_RPC_SYSTEM = 'rpc.system';
 
 const createMetadataAttributesExtractor = (
   config: ConnectNodeInstrumentationConfig,
@@ -31,16 +36,20 @@ const createMetadataAttributesExtractor = (
   }
 
   // See: https://opentelemetry.io/docs/specs/semconv/rpc/
-  return (span: Span, metadata?: Headers) => {
-    const rpcSystem = span.attributes?.[ATTR_RPC_SYSTEM];
+  return (metadata?: Headers) => {
     const attributes: Record<string, string> = {};
 
-    if (rpcSystem && metadata) {
+    if (metadata) {
       for (const [key, mappedKey] of mappings) {
         const value = metadata.get(key);
 
         if (value != null) {
-          attributes[`grpc.${rpcSystem}.${phase}.metadata.${mappedKey}`] = value;
+          const attributeKey =
+            phase === 'request'
+              ? rpcRequestMetadataAttributeKey(mappedKey)
+              : rpcResponseMetadataAttributeKey(mappedKey);
+
+          attributes[attributeKey] = value;
         }
       }
     }
@@ -58,19 +67,21 @@ const createStartSpan = (config: ConnectNodeInstrumentationConfig, tracer: Trace
     const fullName = `${req.service.typeName}/${req.method.name}`;
     const url = parseUrl(req.url);
     const rpcSystem = resolveRpcSystem(req.header);
+    const rpcSystemName = resolveRpcSystemName(req.header);
 
     const span = tracer.startSpan(fullName, {
       attributes: {
         [ATTR_RPC_METHOD]: req.method.name,
         [ATTR_RPC_SERVICE]: req.service.typeName,
         [ATTR_RPC_SYSTEM]: rpcSystem,
+        [ATTR_RPC_SYSTEM_NAME]: rpcSystemName,
         [ATTR_SERVER_ADDRESS]: url.hostname,
         [ATTR_SERVER_PORT]: url.port || undefined
       },
       kind: rpcKindToSpanKind(kind)
     });
 
-    span.setAttributes(extractMetadata(span as Span, req.header));
+    span.setAttributes(extractMetadata(req.header));
 
     return span;
   };
@@ -85,15 +96,19 @@ const createEndSpanWithSuccess = (config: ConnectNodeInstrumentationConfig, kind
       return;
     }
 
-    const rpcSystem = span.attributes?.[ATTR_RPC_SYSTEM];
+    const rpcSystemName = span.attributes?.[ATTR_RPC_SYSTEM_NAME];
 
     span.setStatus({ code: SpanStatusCode.OK });
 
-    if (rpcSystem === 'grpc') {
+    if (rpcSystemName === 'grpc') {
+      span.setAttribute(ATTR_RPC_RESPONSE_STATUS_CODE, 0);
       span.setAttribute(ATTR_RPC_GRPC_STATUS_CODE, 0);
+    } else if (rpcSystemName === 'connectrpc') {
+      span.setAttribute(ATTR_RPC_RESPONSE_STATUS_CODE, 'ok');
+      span.setAttribute(ATTR_RPC_CONNECT_RPC_ERROR_CODE, 'ok');
     }
 
-    span.setAttributes(extractMetadata(span as Span, res.header));
+    span.setAttributes(extractMetadata(res.header));
     span.end();
   };
 };
@@ -109,17 +124,23 @@ const createEndSpanWithError = (config: ConnectNodeInstrumentationConfig, kind: 
 
     const error = err instanceof Error ? (err as Error) : undefined;
     const connectError = isConnectError(error) ? (error as ConnectError) : undefined;
-    const rpcSystem = span.attributes?.[ATTR_RPC_SYSTEM];
+    const rpcSystemName = span.attributes?.[ATTR_RPC_SYSTEM_NAME];
 
     span.setStatus({ code: SpanStatusCode.ERROR, message: error?.message });
 
-    if (rpcSystem === 'grpc') {
-      span.setAttribute(ATTR_RPC_GRPC_STATUS_CODE, connectError?.code ?? 2);
-    } else if (rpcSystem === 'connect_rpc') {
-      span.setAttribute(ATTR_RPC_CONNECT_RPC_ERROR_CODE, errorCodeToString(connectError?.code));
+    if (rpcSystemName === 'grpc') {
+      const statusCode = connectError?.code ?? 2;
+
+      span.setAttribute(ATTR_RPC_RESPONSE_STATUS_CODE, statusCode);
+      span.setAttribute(ATTR_RPC_GRPC_STATUS_CODE, statusCode);
+    } else if (rpcSystemName === 'connectrpc') {
+      const statusCode = errorCodeToString(connectError?.code);
+
+      span.setAttribute(ATTR_RPC_RESPONSE_STATUS_CODE, statusCode);
+      span.setAttribute(ATTR_RPC_CONNECT_RPC_ERROR_CODE, statusCode);
     }
 
-    span.setAttributes(extractMetadata(span as Span, connectError?.metadata));
+    span.setAttributes(extractMetadata(connectError?.metadata));
 
     if (error) {
       span.recordException(error);
