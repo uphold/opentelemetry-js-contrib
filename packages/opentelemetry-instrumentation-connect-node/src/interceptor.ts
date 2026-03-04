@@ -1,4 +1,10 @@
 import {
+  ATTR_RPC_CONNECT_RPC_ERROR_CODE,
+  ATTR_RPC_GRPC_STATUS_CODE,
+  ATTR_RPC_SERVICE,
+  ATTR_RPC_SYSTEM
+} from './semcov';
+import {
   ATTR_RPC_METHOD,
   ATTR_RPC_RESPONSE_STATUS_CODE,
   ATTR_RPC_SYSTEM_NAME,
@@ -14,12 +20,6 @@ import { Span } from '@opentelemetry/sdk-trace-base';
 import { errorCodeToString, isConnectError, resolveRpcSystem, resolveRpcSystemName, rpcKindToSpanKind } from './utils';
 import { memoize } from 'lodash';
 import { safeExecuteInTheMiddle } from '@opentelemetry/instrumentation';
-
-// Deprecated semantic convention attributes kept for backward compatibility with v1.29.
-const ATTR_RPC_CONNECT_RPC_ERROR_CODE = 'rpc.connect_rpc.error_code';
-const ATTR_RPC_GRPC_STATUS_CODE = 'rpc.grpc.status_code';
-const ATTR_RPC_SERVICE = 'rpc.service';
-const ATTR_RPC_SYSTEM = 'rpc.system';
 
 const createMetadataAttributesExtractor = (
   config: ConnectNodeInstrumentationConfig,
