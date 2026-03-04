@@ -85,7 +85,7 @@ const createEndSpanWithSuccess = (config: ConnectNodeInstrumentationConfig, kind
       return;
     }
 
-    const rpcSystem = span.attributes[ATTR_RPC_SYSTEM];
+    const rpcSystem = span.attributes?.[ATTR_RPC_SYSTEM];
 
     span.setStatus({ code: SpanStatusCode.OK });
 
@@ -109,7 +109,7 @@ const createEndSpanWithError = (config: ConnectNodeInstrumentationConfig, kind: 
 
     const error = err instanceof Error ? (err as Error) : undefined;
     const connectError = isConnectError(error) ? (error as ConnectError) : undefined;
-    const rpcSystem = span.attributes[ATTR_RPC_SYSTEM];
+    const rpcSystem = span.attributes?.[ATTR_RPC_SYSTEM];
 
     span.setStatus({ code: SpanStatusCode.ERROR, message: error?.message });
 
