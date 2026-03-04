@@ -32,7 +32,7 @@ const createMetadataAttributesExtractor = (
 
   // See: https://opentelemetry.io/docs/specs/semconv/rpc/
   return (span: Span, metadata?: Headers) => {
-    const rpcSystem = span.attributes[ATTR_RPC_SYSTEM];
+    const rpcSystem = span.attributes?.[ATTR_RPC_SYSTEM];
     const attributes: Record<string, string> = {};
 
     if (rpcSystem && metadata) {
