@@ -1,5 +1,9 @@
 # Changelog
 
+## [@uphold/opentelemetry-mutable-baggage@v3.1.0](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-mutable-baggage@v3.1.0) (2026-07-21)
+
+- Bump OpenTelemetry and lodash dependencies [\#67](https://github.com/uphold/opentelemetry-js-contrib/pull/67) ([ricardobcl](https://github.com/ricardobcl))
+
 ## [@uphold/opentelemetry-mutable-baggage@v3.0.0](https://github.com/uphold/opentelemetry-js-contrib/releases/tag/@uphold/opentelemetry-mutable-baggage@v3.0.0) (2026-01-25)
 
 - Fix wrong version for `@uphold/opentelemetry-mutable-baggage` [\#60](https://github.com/uphold/opentelemetry-js-contrib/pull/60) ([satazor](https://github.com/satazor))
