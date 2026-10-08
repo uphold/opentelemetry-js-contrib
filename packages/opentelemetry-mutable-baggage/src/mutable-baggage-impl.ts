@@ -18,7 +18,12 @@ export class MutableBaggageImpl implements Baggage {
   }
 
   getAllEntries(): [string, BaggageEntry][] {
-    return Array.from(this.entries.entries());
+    // Return copies rather than the stored `BaggageEntry` objects. `Array.from(map.entries())`
+    // hands out live references, so a caller could mutate baggage behind the `setEntry` API —
+    // a contract `getEntry` already honours defensively via `Object.assign({}, entry)`. Returning
+    // references from one accessor and copies from the other is an inconsistency that silently
+    // corrupts baggage state for consumers such as `BaggageSpanProcessor`.
+    return Array.from(this.entries.entries()).map(([key, entry]) => [key, { ...entry }]);
   }
 
   setEntry(key: string, entry: BaggageEntry): MutableBaggageImpl {
